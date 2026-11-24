@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakuga Kit — Anime Impact UI Components</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#08080A;color:#FAFAF7;font-family:system-ui,-apple-system,sans-serif;padding:28px 16px 60px}
+  .page{max-width:760px;margin:0 auto}
+  .kick{font-size:11px;letter-spacing:.34em;color:#FF3355;text-transform:uppercase;text-align:center}
+  h1{font-family:Georgia,serif;font-size:38px;text-align:center;margin:8px 0 4px;font-weight:600}
+  h1 em{color:#FF5C77;font-style:italic}
+  .tag{text-align:center;color:rgba(250,250,247,.55);font-size:14px;margin-bottom:8px}
+  .jp{text-align:center;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;letter-spacing:.5em;color:rgba(250,250,247,.4);font-size:14px;margin-bottom:34px}
+  h2{font-family:Georgia,serif;font-size:22px;margin:38px 0 4px}
+  h2 .kj{color:#FF3355;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;margin-right:8px}
+  .desc{color:rgba(250,250,247,.55);font-size:13.5px;margin-bottom:14px;line-height:1.55}
+  .stage{position:relative;border-radius:20px;background:#0B0B0D;border:1px solid rgba(250,250,247,.09);overflow:hidden;padding:26px 18px 22px}
+  canvas.bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  /* ---- burst button ---- */
+  .vjp{position:absolute;right:12px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:44px;font-weight:700;letter-spacing:.14em;color:rgba(250,250,247,.18);user-select:none;animation:vp 4.5s ease-in-out infinite}
+  @keyframes vp{0%,100%{opacity:.6}50%{opacity:1}}
+  .kjdisc{position:absolute;left:50%;top:40%;width:220px;height:220px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(5,5,8,.9) 0%,rgba(5,5,8,.55) 55%,transparent 72%);opacity:0;pointer-events:none;z-index:5}
+  .bigjp{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:130px;font-weight:700;line-height:1;color:#FF3355;opacity:0;z-index:6;pointer-events:none;-webkit-text-stroke:2px rgba(250,250,247,.85);paint-order:stroke fill;text-shadow:0 0 22px rgba(255,51,85,.75),0 6px 30px rgba(0,0,0,.8)}
+  .kjcap{position:absolute;left:50%;top:calc(40% + 88px);transform:translateX(-50%);z-index:6;text-align:center;opacity:0;pointer-events:none}
+  .kjcap .r{font-size:13px;letter-spacing:.34em;font-weight:700}
+  .kjcap .m{font-size:10px;letter-spacing:.18em;color:rgba(250,250,247,.65);margin-top:3px;text-transform:uppercase}
+  .btnarea{position:relative;z-index:4;text-align:center;padding:34px 0 20px}
+  .mega{position:relative;font-weight:800;font-size:17px;letter-spacing:.05em;color:#fff;background:linear-gradient(180deg,#FF5C77,#E62E4D);border:none;border-radius:999px;padding:15px 38px;cursor:pointer;overflow:hidden;animation:glow 2.6s ease-in-out infinite;font-family:inherit}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,51,85,.45),0 12px 28px rgba(230,46,77,.35)}50%{box-shadow:0 0 0 12px rgba(255,51,85,0),0 12px 40px rgba(230,46,77,.65)}}
+  .mega::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite}
+  @keyframes shine{0%,50%{left:-80%}85%,100%{left:135%}}
+  .mega small{display:block;font-size:11px;letter-spacing:.4em;font-weight:700;opacity:.9;margin-top:2px}
+  /* ---- goo toggle ---- */
+  .goowrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .goo{position:relative;width:150px;height:64px;flex:none;filter:url(#goof);cursor:pointer}
+  .blob{position:absolute;top:50%;width:52px;height:52px;border-radius:50%;background:#2E2E33;transform:translateY(-50%);transition:background .5s}
+  .blob.l{left:6px}.blob.r{right:6px}
+  .goo.on .blob{background:#E62E4D}
+  .gknob{position:absolute;top:50%;left:6px;width:52px;height:52px;border-radius:50%;background:#FAFAF7;transform:translateY(-50%);z-index:2}
+  .bridge{position:absolute;top:50%;left:32px;width:30px;height:34px;border-radius:50%;background:#FAFAF7;transform:translateY(-50%) scale(0);z-index:1}
+  /* ---- slider ---- */
+  .pct{font-family:Georgia,serif;font-size:42px;text-align:center;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+  .pct small{font-size:18px;color:#FF3355}
+  .slider{position:relative;height:36px;margin:16px 6px 6px;touch-action:none;cursor:pointer;z-index:5}
+  .track{position:absolute;left:0;right:0;top:50%;height:14px;transform:translateY(-50%);border-radius:99px;background:#26262B;overflow:hidden}
+  .fill{position:absolute;left:0;top:0;height:100%;width:45%;border-radius:99px;background:linear-gradient(90deg,#B01E38,#FF3355,#FF5C77,#FF3355);background-size:220% 100%;animation:flow 1.5s linear infinite;overflow:hidden}
+  @keyframes flow{to{background-position:-220% 0}}
+  .wave{position:absolute;right:-6px;top:0;height:100%;width:14px;opacity:.85}
+  .ticks{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 3px;pointer-events:none}
+  .tick{width:3px;height:8px;border-radius:2px;background:rgba(250,250,247,.28);transition:background .2s,transform .2s}
+  .tick.lit{background:#FFD7DE;transform:scaleY(1.5)}
+  .thumb{position:absolute;top:50%;left:45%;width:32px;height:32px;border-radius:50%;background:#FAFAF7;border:3px solid #FF3355;transform:translate(-50%,-50%);box-shadow:0 6px 18px rgba(255,51,85,.55);z-index:6;pointer-events:none;animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,51,85,.45),0 6px 18px rgba(255,51,85,.5)}50%{box-shadow:0 0 0 9px rgba(255,51,85,0),0 6px 24px rgba(255,51,85,.7)}}
+  .ghost{position:absolute;top:50%;width:32px;height:32px;border-radius:50%;background:rgba(255,51,85,.35);filter:blur(3px);transform:translate(-50%,-50%);z-index:4;pointer-events:none}
+  .lblrow{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.22em;color:rgba(250,250,247,.45);text-transform:uppercase;margin:10px 8px 0}
+  /* ---- pond ---- */
+  .pond{position:relative;height:190px;border-radius:16px;background:radial-gradient(ellipse at 50% 40%,#141318,#0B0B0D 75%);border:1px solid rgba(250,250,247,.12);overflow:hidden;cursor:pointer}
+  .pond canvas{position:absolute;inset:0;width:100%;height:100%}
+  .pondlbl{position:absolute;left:12px;bottom:9px;font-size:10px;letter-spacing:.22em;color:rgba(250,250,247,.4);text-transform:uppercase;pointer-events:none}
+  /* ---- fan ---- */
+  .fanbox{position:relative;height:196px}
+  .pivot{position:absolute;left:50%;bottom:8px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:radial-gradient(circle at 38% 35%,#F2DFAC,#C9A227 70%,#8A6D1F);z-index:9;box-shadow:0 3px 8px rgba(0,0,0,.6)}
+  .blade{position:absolute;left:50%;bottom:16px;width:64px;height:158px;margin-left:-32px;border-radius:32px 32px 10px 10px;transform-origin:50% 100%;display:flex;flex-direction:column;align-items:center;padding-top:16px;cursor:pointer;border:1px solid rgba(0,0,0,.25);transition:transform .8s cubic-bezier(.3,1.35,.35,1)}
+  .blade .k{font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:26px;font-weight:700}
+  .blade .e{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;margin-top:3px;opacity:.85}
+  .fancap{text-align:center;font-size:12.5px;color:rgba(250,250,247,.6);margin-top:8px;min-height:18px}
+  .fancap b{color:#FAFAF7}
+  .fanbtn{display:block;margin:10px auto 0;padding:10px 22px;border-radius:999px;border:1px solid rgba(250,250,247,.25);background:rgba(250,250,247,.06);color:#FAFAF7;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+  /* ---- zipper ---- */
+  .zip{position:relative;height:230px;border-radius:16px;overflow:hidden;border:1px solid rgba(250,250,247,.12);touch-action:none;cursor:ns-resize;background:#101013}
+  .secret{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 45%,#1B1216,#0B0B0D 78%)}
+  .secret .sk{font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:64px;color:#FF3355;-webkit-text-stroke:1.5px rgba(250,250,247,.8);paint-order:stroke fill}
+  .secret .st{color:rgba(250,250,247,.75);font-size:13px;margin-top:6px}
+  .half{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(180deg,#26262C,#17171B);z-index:2}
+  .half.L{left:0;border-right:2px dashed rgba(250,250,247,.3)}
+  .half.R{right:0;border-left:2px dashed rgba(250,250,247,.3)}
+  .half .hk{position:absolute;top:16px;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:21px;color:rgba(250,250,247,.4)}
+  .half.L .hk{right:14px}.half.R .hk{left:14px}
+  .pull{position:absolute;left:50%;top:6%;transform:translate(-50%,-50%);z-index:4;width:34px;height:52px;border-radius:10px;background:linear-gradient(180deg,#F2DFAC,#C9A227);box-shadow:0 6px 16px rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px;cursor:grab}
+  .pull::after{content:'';width:12px;height:16px;border-radius:6px;border:3px solid #7A5E14;background:#0B0B0D}
+  .zlbl{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:10px;letter-spacing:.24em;color:rgba(250,250,247,.4);text-transform:uppercase;z-index:3;pointer-events:none}
+  /* ---- shodo ---- */
+  .shodobox{position:relative;background:#0B0B0D;border:1px solid rgba(250,250,247,.1);border-radius:20px;padding:18px 14px 14px}
+  .shodorow{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .paintbtn{padding:11px 20px;border:none;border-radius:999px;background:linear-gradient(180deg,#FF5C77,#E62E4D);color:#fff;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;flex:none}
+  .paintbtn small{font-family:'Hiragino Mincho ProN','Yu Mincho',serif;letter-spacing:.24em;margin-left:6px}
+  .spct{font-family:Georgia,serif;font-size:27px;font-variant-numeric:tabular-nums}
+  .stamp{position:absolute;right:20px;top:14px;width:52px;height:52px;border-radius:9px;background:#E62E4D;color:#fff;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;font-size:27px;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:rotate(9deg);box-shadow:0 8px 20px rgba(230,46,77,.5);z-index:5}
+  footer{text-align:center;color:rgba(250,250,247,.35);font-size:12px;margin-top:48px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kick">Sakuga Kit &middot; 作画キット</div>
+  <h1>Anime Impact <em>UI Kit</em></h1>
+  <div class="tag">Handcrafted animated components — fluid motion, Japanese impact words, zero dependencies. Everything on this page is live: touch it.</div>
+  <div class="jp">サクガ ・ エフェクト ・ ライブラリ</div>
+
+  <h2><span class="kj">爆</span>Impact Button</h2>
+  <div class="desc">Click: vortex particle burst with swirl physics, shockwave rings, squash-stretch, and a giant kanji that lands clearly — bold, white-outlined, held ~1.2s with its reading.</div>
+  <div class="stage" id="bstage">
+    <canvas class="bg" id="bcv"></canvas>
+    <div class="vjp" id="vjp">衝撃</div>
+    <div class="kjdisc" id="disc"></div>
+    <div class="bigjp" id="bigjp">爆</div>
+    <div class="kjcap" id="kjcap"><div class="r" id="kjr">BAKU</div><div class="m" id="kjm">Explosion</div></div>
+    <div class="btnarea"><button class="mega" id="mega">POWER UP<small>ドン!</small></button></div>
+  </div>
+
+  <h2><span class="kj">液</span>Liquid Goo Toggle</h2>
+  <div class="desc">The knob melts mid-journey: two droplets stretch, merge and split like liquid. Built with an SVG goo filter — no library.</div>
+  <div class="stage">
+    <svg width="0" height="0" style="position:absolute"><defs><filter id="goof"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/></filter></defs></svg>
+    <div class="goowrap">
+      <div class="goo" id="goo"><div class="blob l"></div><div class="blob r"></div><div class="bridge" id="bridge"></div><div class="gknob" id="gknob"></div></div>
+      <div style="color:rgba(250,250,247,.7);font-size:13.5px;line-height:1.6"><b style="color:#FAFAF7">液体 Ekitai — liquid.</b><br>Tap the switch and watch it melt across.</div>
+    </div>
+  </div>
+
+  <h2><span class="kj">流</span>The Living Slider</h2>
+  <div class="desc">Drag it: a liquid wave rides the fill edge (faster when you drag faster), smear ghosts trail the thumb, sparks fly, ticks light up as you pass. Release: 流 NAGARE. Hit 100%: 満 FULL.</div>
+  <div class="stage" id="sstage">
+    <canvas class="bg" id="scv"></canvas>
+    <div class="kjdisc" id="sdisc" style="top:34%"></div>
+    <div class="bigjp" id="sbig" style="top:34%;font-size:110px">流</div>
+    <div class="kjcap" id="scap" style="top:calc(34% + 76px)"><div class="r" id="sr">NAGARE</div><div class="m" id="sm">Flow</div></div>
+    <div class="pct"><span id="pctn">45</span><small>%</small></div>
+    <div class="slider" id="slider">
+      <div class="track"><div class="fill" id="fill"><svg class="wave" viewBox="0 0 14 14" preserveAspectRatio="none"><path id="wavep" d="M7 0 Q12 3.5 7 7 Q2 10.5 7 14 L14 14 L14 0 Z" fill="#FF8FA3" opacity="0.8"/></svg></div><div class="ticks" id="ticks"></div></div>
+      <div class="thumb" id="thumb"></div>
+    </div>
+    <div class="lblrow"><span>静 ・ Still</span><span>疾風 ・ Gale</span></div>
+  </div>
+
+  <h2><span class="kj">池</span>The Pond</h2>
+  <div class="desc">Five koi live here — they swim on their own, tails wagging. Tap the water: ripples spread, droplets jump, and nearby koi flee before drifting back.</div>
+  <div class="pond" id="pond"><canvas id="pcv"></canvas><div class="pondlbl">波紋 Hamon — tap the water</div></div>
+
+  <h2><span class="kj">扇</span>Folding Fan Deck</h2>
+  <div class="desc">A hand fan of five element blades — 炎 flame, 氷 ice, 雷 thunder, 風 wind, 月 moon. It springs open blade by blade; tap one to draw its power.</div>
+  <div class="stage">
+    <div class="fanbox" id="fanbox"><div class="pivot"></div></div>
+    <div class="fancap" id="fancap">Pankha band hai — kholo, phir ek blade chuno</div>
+    <button class="fanbtn" id="fanbtn">Open the Fan ・ 開く</button>
+  </div>
+
+  <h2><span class="kj">秘</span>The Zipper</h2>
+  <div class="desc">Drag the golden pull down — the cover splits along a widening wedge and the secret （秘 himitsu) is revealed underneath. Drag back up to seal it again.</div>
+  <div class="zip" id="zip">
+    <div class="secret"><div class="sk">秘</div><div class="st">HIMITSU — the secret was inside the UI all along</div></div>
+    <div class="half L" id="hl"><div class="hk">秘</div></div>
+    <div class="half R" id="hr"><div class="hk">密</div></div>
+    <div class="pull" id="pull"></div>
+    <div class="zlbl">Drag down to unzip</div>
+  </div>
+
+  <h2><span class="kj">書</span>Shodo Brush Loader</h2>
+  <div class="desc">Press Paint: a calligraphy stroke draws itself with rough ink edges (a turbulence filter, not a clean vector), the brush tip riding its front — and at 100% the 完 stamp slams down.</div>
+  <div class="shodobox">
+    <svg width="0" height="0" style="position:absolute"><defs><filter id="inkr"><feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></defs></svg>
+    <svg viewBox="0 0 320 74" style="width:100%;display:block">
+      <path d="M14 52 C 70 18, 120 66, 168 38 S 268 22, 306 40" fill="none" stroke="rgba(250,250,247,.12)" stroke-width="13" stroke-linecap="round"/>
+      <path id="stroke" d="M14 52 C 70 18, 120 66, 168 38 S 268 22, 306 40" fill="none" stroke="#FAFAF7" stroke-width="11" stroke-linecap="round" filter="url(#inkr)"/>
+      <circle id="tip" r="8" cx="14" cy="52" fill="#FAFAF7" opacity="0"/>
+    </svg>
+    <div class="stamp" id="stamp">完</div>
+    <div class="shodorow"><button class="paintbtn" id="paint">Paint<small>書く</small></button><div class="spct"><span id="spct">0</span>%</div><div style="font-size:12px;color:rgba(250,250,247,.55)">stroke bhar raha hai — khatam pe mohar lagegi</div></div>
+  </div>
+
+  <footer>
+    Sakuga Kit v1 — built for Sir Amon.<br>
+    Palette: near-black #0B0B0D · crimson #FF3355 / #E62E4D · white #FAFAF7.<br>
+    Rule: every component carries a matched Japanese word, motion is fluid (springs + damping, never linear), and many layers move at once.
+  </footer>
+</div>
+<script>
+/* ============ IMPACT BUTTON ============ */
+(function(){
+  var stage=document.getElementById('bstage'),cv=document.getElementById('bcv'),ctx=cv.getContext('2d');
+  function fit(){cv.width=stage.clientWidth;cv.height=stage.clientHeight}fit();addEventListener('resize',fit);
+  var parts=[],rings=[],t=0,sx=0,sy=0,flash=0;
+  var blobs=[{x:.28,y:.34,r:120,ph:0,sp:.5},{x:.72,y:.6,r:150,ph:2.1,sp:.38},{x:.5,y:.85,r:100,ph:4.2,sp:.62}];
+  (function loop(){
+    t+=0.016;ctx.clearRect(0,0,cv.width,cv.height);
+    blobs.forEach(function(b){var bx=(b.x+Math.sin(t*b.sp+b.ph)*0.05)*cv.width,by=(b.y+Math.cos(t*b.sp*0.8+b.ph)*0.05)*cv.height;var g=ctx.createRadialGradient(bx,by,0,bx,by,b.r);g.addColorStop(0,'rgba(255,51,85,0.15)');g.addColorStop(1,'rgba(255,51,85,0)');ctx.fillStyle=g;ctx.fillRect(bx-b.r,by-b.r,b.r*2,b.r*2)});
+    for(var k=0;k<3;k++){ctx.beginPath();ctx.strokeStyle='rgba(250,250,247,'+(0.05+k*0.02)+')';ctx.lineWidth=1.6;for(var x=0;x<=cv.width;x+=8){var y=cv.height*(0.24+k*0.26)+Math.sin(x*0.016+t*(0.7+k*0.23)+k*2)*13;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}ctx.stroke()}
+    if(flash>0){ctx.fillStyle='rgba(250,250,247,'+(flash*0.4)+')';ctx.fillRect(0,0,cv.width,cv.height);flash-=0.04}
+    rings=rings.filter(function(r){r.r+=3.4;r.o-=0.03;ctx.strokeStyle='rgba(255,51,85,'+Math.max(r.o,0)+')';ctx.lineWidth=2.6;ctx.beginPath();ctx.arc(sx,sy,r.r,0,7);ctx.stroke();return r.o>0});
+    parts=parts.filter(function(p){var dx=p.x-sx,dy=p.y-sy,d=Math.sqrt(dx*dx+dy*dy)||1;if(p.sw>0){p.vx+=(-dy/d)*p.sw;p.vy+=(dx/d)*p.sw;p.sw*=0.94}p.vx*=0.965;p.vy*=0.965;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life-=0.011;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.max(p.life,0);ctx.fillStyle=p.c;ctx.shadowColor=p.c;ctx.shadowBlur=8;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.55);ctx.restore();return p.life>0});
+    ctx.globalAlpha=1;requestAnimationFrame(loop);
+  })();
+  var words=[['爆','爆発','BAKU','Explosion'],['斬','斬撃','ZAN','Slash'],['衝','衝撃','SHŌ','Impact'],['破','破壊','HA','Destroy'],['閃','閃光','SEN','Flash']],wi=0;
+  var big=document.getElementById('bigjp'),vjp=document.getElementById('vjp'),mega=document.getElementById('mega'),disc=document.getElementById('disc'),cap=document.getElementById('kjcap'),kjr=document.getElementById('kjr'),kjm=document.getElementById('kjm');
+  mega.animate([{transform:'translateY(0)'},{transform:'translateY(-5px)'},{transform:'translateY(0)'}],{duration:2600,easing:'ease-in-out',iterations:Infinity});
+  mega.addEventListener('click',function(){
+    var r=stage.getBoundingClientRect(),b=mega.getBoundingClientRect();sx=b.left-r.left+b.width/2;sy=b.top-r.top+b.height/2;
+    wi=(wi+1)%words.length;big.textContent=words[wi][0];vjp.textContent=words[wi][1];kjr.textContent=words[wi][2];kjm.textContent=words[wi][3];
+    disc.animate([{opacity:0},{opacity:1,offset:0.18},{opacity:1,offset:0.78},{opacity:0}],{duration:1700,easing:'ease-in-out'});
+    big.animate([{opacity:0,transform:'translate(-50%,-50%) scale(1.7)',filter:'blur(9px)'},{opacity:1,transform:'translate(-50%,-50%) scale(0.97)',filter:'blur(0px)',offset:0.22},{opacity:1,transform:'translate(-50%,-50%) scale(1)',offset:0.35},{opacity:1,offset:0.78},{opacity:0,transform:'translate(-50%,-54%) scale(1.04)',filter:'blur(3px)'}],{duration:1700,easing:'cubic-bezier(.22,.9,.26,1)'});
+    cap.animate([{opacity:0,transform:'translateX(-50%) translateY(8px)'},{opacity:1,transform:'translateX(-50%) translateY(0)',offset:0.3},{opacity:1,offset:0.78},{opacity:0}],{duration:1700,easing:'ease-out'});
+    flash=0.8;rings.push({r:14,o:0.85});setTimeout(function(){rings.push({r:8,o:0.55})},150);
+    var cols=['#FF3355','#FAFAF7','#FF5C77','#C9C9CE'];
+    for(var j=0;j<46;j++){var a=Math.random()*Math.PI*2,sp=1.6+Math.random()*4.4;parts.push({x:sx,y:sy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,s:4+Math.random()*8,rot:Math.random()*3,vr:(Math.random()-0.5)*0.3,life:0.8+Math.random()*0.6,c:cols[j%4],sw:0.5+Math.random()*0.5})}
+    mega.animate([{transform:'scale(1,1)'},{transform:'scale(1.2,0.78)',offset:0.3},{transform:'scale(0.95,1.09)',offset:0.58},{transform:'scale(1,1)'}],{duration:520,easing:'cubic-bezier(.34,1.4,.44,1)'});
+    stage.animate([{transform:'translate(0,0)'},{transform:'translate(-4px,2px)'},{transform:'translate(3px,-3px)'},{transform:'translate(0,0)'}],{duration:420,easing:'ease-in-out'});
+  });
+})();
+/* ============ GOO TOGGLE ============ */
+(function(){
+  var goo=document.getElementById('goo'),knob=document.getElementById('gknob'),bridge=document.getElementById('bridge'),on=false;
+  goo.addEventListener('click',function(){
+    on=!on;goo.classList.toggle('on',on);
+    knob.animate([{left:(on?6:92)+'px'},{left:(on?92:6)+'px'}],{duration:620,easing:'cubic-bezier(.3,1.25,.35,1)',fill:'forwards'});
+    bridge.animate([{transform:'translateY(-50%) scale(0)',left:(on?32:86)+'px'},{transform:'translateY(-50%) scale(1.15,0.8)',left:'58px',offset:0.45},{transform:'translateY(-50%) scale(0)',left:(on?86:32)+'px'}],{duration:620,easing:'ease-in-out'});
+    knob.animate([{transform:'translateY(-50%) scale(1,1)'},{transform:'translateY(-50%) scale(1.35,0.72)',offset:0.4},{transform:'translateY(-50%) scale(0.92,1.1)',offset:0.7},{transform:'translateY(-50%) scale(1,1)'}],{duration:620,easing:'ease-in-out'});
+  });
+})();
+/* ============ LIVING SLIDER ============ */
+(function(){
+  var stage=document.getElementById('sstage'),slider=document.getElementById('slider'),fill=document.getElementById('fill'),thumb=document.getElementById('thumb'),pctn=document.getElementById('pctn'),ticksEl=document.getElementById('ticks');
+  var cv=document.getElementById('scv'),ctx=cv.getContext('2d');
+  function fit(){cv.width=stage.clientWidth;cv.height=stage.clientHeight}fit();addEventListener('resize',fit);
+  var NT=21,ticks=[];
+  for(var i=0;i<NT;i++){var d=document.createElement('div');d.className='tick';ticksEl.appendChild(d);ticks.push(d)}
+  var val=45,disp=45,drag=false,vel=0,parts=[],wavep=document.getElementById('wavep'),wph=0;
+  (function loop(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    wph+=drag?0.55:0.16;
+    var a=7+Math.sin(wph)*3.4,b=7+Math.cos(wph*0.9)*3.4;
+    wavep.setAttribute('d','M'+a+' 0 Q'+(a+5)+' 3.5 '+b+' 7 Q'+(b-5)+' 10.5 '+a+' 14 L14 14 L14 0 Z');
+    disp+=(val-disp)*0.22;pctn.textContent=Math.round(disp);
+    var sr=stage.getBoundingClientRect(),tr=thumb.getBoundingClientRect(),tx=tr.left-sr.left+16,ty=tr.top-sr.top+16;
+    if(drag&&Math.abs(vel)>0.6){for(var j=0;j<3;j++){parts.push({x:tx,y:ty+(Math.random()-0.5)*14,vx:-vel*(0.25+Math.random()*0.3)+(Math.random()-0.5)*1.4,vy:(Math.random()-0.5)*1.6,s:2.5+Math.random()*4,life:0.55+Math.random()*0.3,c:Math.random()<0.6?'#FF3355':'#FAFAF7',rot:Math.random()*3,vr:(Math.random()-0.5)*0.3})}}
+    parts=parts.filter(function(p){p.vx*=0.94;p.vy*=0.94;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life-=0.02;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.max(p.life,0);ctx.fillStyle=p.c;ctx.shadowColor=p.c;ctx.shadowBlur=7;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.55);ctx.restore();return p.life>0});
+    ctx.globalAlpha=1;requestAnimationFrame(loop);
+  })();
+  function render(){fill.style.width=val+'%';thumb.style.left=val+'%';var lit=Math.round(val/100*(NT-1));ticks.forEach(function(tk,i){tk.classList.toggle('lit',i<=lit)})}
+  render();
+  function ghost(x){var g=document.createElement('div');g.className='ghost';g.style.left=x+'%';slider.appendChild(g);g.animate([{opacity:0.75,transform:'translate(-50%,-50%) scaleX(1.35)'},{opacity:0,transform:'translate(-50%,-50%) scaleX(0.9)'}],{duration:300,easing:'ease-out'}).onfinish=function(){g.remove()}}
+  function set(e){var r=slider.getBoundingClientRect();var x=e.clientX;var nv=Math.max(0,Math.min(100,(x-r.left)/r.width*100));vel=nv-val;val=nv;render();if(Math.abs(vel)>2.2)ghost(val)}
+  var big=document.getElementById('sbig'),disc=document.getElementById('sdisc'),cap=document.getElementById('scap'),sr2=document.getElementById('sr'),sm=document.getElementById('sm');
+  function kanji(ch,ro,me){big.textContent=ch;sr2.textContent=ro;sm.textContent=me;
+    disc.animate([{opacity:0},{opacity:1,offset:0.18},{opacity:1,offset:0.78},{opacity:0}],{duration:1500,easing:'ease-in-out'});
+    big.animate([{opacity:0,transform:'translate(-50%,-50%) scale(1.65)',filter:'blur(8px)'},{opacity:1,transform:'translate(-50%,-50%) scale(0.97)',filter:'blur(0px)',offset:0.22},{opacity:1,transform:'translate(-50%,-50%) scale(1)',offset:0.35},{opacity:1,offset:0.78},{opacity:0,transform:'translate(-50%,-54%) scale(1.04)',filter:'blur(3px)'}],{duration:1500,easing:'cubic-bezier(.22,.9,.26,1)'});
+    cap.animate([{opacity:0,transform:'translateX(-50%) translateY(8px)'},{opacity:1,transform:'translateX(-50%) translateY(0)',offset:0.3},{opacity:1,offset:0.78},{opacity:0}],{duration:1500,easing:'ease-out'});
+    thumb.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(1.3,0.82)',offset:0.3},{transform:'translate(-50%,-50%) scale(0.94,1.08)',offset:0.6},{transform:'translate(-50%,-50%) scale(1)'}],{duration:460,easing:'cubic-bezier(.34,1.4,.44,1)'});
+  }
+  slider.addEventListener('pointerdown',function(e){drag=true;slider.setPointerCapture(e.pointerId);set(e);thumb.style.animation='none'});
+  slider.addEventListener('pointermove',function(e){if(drag)set(e)});
+  function up(){if(!drag)return;drag=false;thumb.style.animation='';if(val>=99.5)kanji('満','MAN','Full Power');else if(val<=0.5)kanji('空','KŪ','Empty');else kanji('流','NAGARE','Flow')}
+  slider.addEventListener('pointerup',up);slider.addEventListener('pointercancel',up);
+})();
+/* ============ POND ============ */
+(function(){
+  var pond=document.getElementById('pond'),cv=document.getElementById('pcv'),ctx=cv.getContext('2d');
+  function fit(){cv.width=pond.clientWidth;cv.height=pond.clientHeight}fit();addEventListener('resize',fit);
+  var koi=[],ripples=[],drops=[],t=0;
+  for(var i=0;i<5;i++){koi.push({x:Math.random(),y:Math.random(),a:Math.random()*6.3,sp:0.35+Math.random()*0.3,wg:Math.random()*6.3,flee:0,fa:0,ta:undefined})}
+  (function loop(){
+    t+=0.016;ctx.clearRect(0,0,cv.width,cv.height);
+    koi.forEach(function(k){
+      k.wg+=0.25;
+      if(k.flee>0){k.a+=(k.fa-k.a)*0.12;k.flee-=0.016}else{k.a+=Math.sin(t*0.7+k.wg*0.4)*0.03;if(Math.random()<0.006)k.ta=Math.random()*6.3;if(k.ta!==undefined)k.a+=(k.ta-k.a)*0.02}
+      var sp=k.sp*(k.flee>0?3.2:1);
+      k.x+=Math.cos(k.a)*sp*0.0035;k.y+=Math.sin(k.a)*sp*0.0035;
+      if(k.x<0.04)k.a=0;if(k.x>0.96)k.a=Math.PI;if(k.y<0.08)k.a=Math.PI/2;if(k.y>0.92)k.a=-Math.PI/2;
+      var x=k.x*cv.width,y=k.y*cv.height;
+      ctx.save();ctx.translate(x,y);ctx.rotate(k.a);ctx.fillStyle='#FF3355';ctx.shadowColor='#FF3355';ctx.shadowBlur=6;
+      ctx.beginPath();ctx.ellipse(0,0,9,3.6,0,0,7);ctx.fill();
+      ctx.beginPath();ctx.moveTo(-8,0);ctx.lineTo(-14,3.4*Math.sin(k.wg*2.2)-1);ctx.lineTo(-14,-3.4*Math.sin(k.wg*2.2)+1);ctx.closePath();ctx.globalAlpha=0.85;ctx.fill();ctx.restore();ctx.globalAlpha=1;
+    });
+    ripples=ripples.filter(function(r){r.r+=1.5;r.o-=0.014;ctx.strokeStyle='rgba(250,250,247,'+Math.max(r.o,0)*0.7+')';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(r.x,r.y,r.r,r.r*0.42,0,0,7);ctx.stroke();ctx.strokeStyle='rgba(255,51,85,'+Math.max(r.o,0)*0.5+')';ctx.beginPath();ctx.ellipse(r.x,r.y,r.r*0.62,r.r*0.26,0,0,7);ctx.stroke();return r.o>0});
+    drops=drops.filter(function(d){d.vy+=0.22;d.x+=d.vx;d.y+=d.vy;d.life-=0.02;ctx.globalAlpha=Math.max(d.life,0);ctx.fillStyle='#FAFAF7';ctx.beginPath();ctx.arc(d.x,d.y,d.s,0,7);ctx.fill();return d.life>0&&d.y<cv.height+8});
+    ctx.globalAlpha=1;requestAnimationFrame(loop);
+  })();
+  pond.addEventListener('pointerdown',function(e){
+    var r=pond.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+    ripples.push({x:x,y:y,r:6,o:1});setTimeout(function(){ripples.push({x:x,y:y,r:3,o:0.8})},110);
+    for(var j=0;j<12;j++){var a=Math.random()*Math.PI*2;drops.push({x:x,y:y,vx:Math.cos(a)*(0.6+Math.random()*1.6),vy:-(1.6+Math.random()*2.4),s:1.6+Math.random()*2.2,life:0.9})}
+    koi.forEach(function(k){var dx=k.x*cv.width-x,dy=k.y*cv.height-y;if(Math.sqrt(dx*dx+dy*dy)<110){k.fa=Math.atan2(dy,dx);k.flee=1.1}});
+  });
+})();
+/* ============ FAN DECK ============ */
+(function(){
+  var fanData=[['炎','Flame','#FF7A29'],['氷','Ice','#7CCBFF'],['雷','Thunder','#F2DFAC'],['風','Wind','#A9E8C0'],['月','Moon','#E9E4F5']];
+  var fanbox=document.getElementById('fanbox'),fancap=document.getElementById('fancap'),fanOpen=false,blades=[];
+  fanData.forEach(function(d,i){
+    var b=document.createElement('div');b.className='blade';
+    b.style.background='linear-gradient(180deg,'+d[2]+','+d[2]+'CC 55%,#1B1B1F 130%)';
+    b.style.color='#14100C';b.style.zIndex=String(i+1);
+    b.innerHTML='<div class="k">'+d[0]+'</div><div class="e">'+d[1]+'</div>';
+    b.addEventListener('click',function(){
+      if(!fanOpen)return;
+      blades.forEach(function(x){x.style.filter='';x.style.marginTop='0'});
+      b.style.filter='brightness(1.12) saturate(1.15)';b.style.marginTop='-13px';
+      fancap.innerHTML='Chuna gaya: <b>'+d[0]+' '+d[1]+'</b> — pankhe se ek taqat nikal aayi';
+    });
+    fanbox.appendChild(b);blades.push(b);
+  });
+  document.getElementById('fanbtn').addEventListener('click',function(){
+    fanOpen=!fanOpen;
+    this.innerHTML=fanOpen?'Close the Fan ・ 閉じる':'Open the Fan ・ 開く';
+    blades.forEach(function(b,i){
+      b.style.transitionDelay=(fanOpen?i*0.055:(blades.length-i)*0.04)+'s';
+      b.style.transform='rotate('+(fanOpen?(i-2)*27:0)+'deg)';
+    });
+    fancap.innerHTML=fanOpen?'Pankha khul gaya — <b>ek blade tap karo</b>':'Pankha band hai — kholo, phir ek blade chuno';
+  });
+})();
+/* ============ ZIPPER ============ */
+(function(){
+  var zip=document.getElementById('zip'),hl=document.getElementById('hl'),hr=document.getElementById('hr'),pull=document.getElementById('pull');
+  var zp=6,zdrag=false;
+  function zrender(){
+    pull.style.top=zp+'%';
+    hl.style.clipPath='polygon(0 0, '+(50-zp*0.42)+'% 0, 50% '+zp+'%, 50% 100%, 0 100%)';
+    hr.style.clipPath='polygon(100% 0, '+(50+zp*0.42)+'% 0, 50% '+zp+'%, 50% 100%, 100% 100%)';
+  }
+  zrender();
+  function zset(e){var r=zip.getBoundingClientRect();zp=Math.max(4,Math.min(96,(e.clientY-r.top)/r.height*100));zrender()}
+  zip.addEventListener('pointerdown',function(e){zdrag=true;zip.setPointerCapture(e.pointerId);zset(e)});
+  zip.addEventListener('pointermove',function(e){if(zdrag)zset(e)});
+  zip.addEventListener('pointerup',function(){zdrag=false;pull.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(1.12,0.9)',offset:0.35},{transform:'translate(-50%,-50%) scale(1)'}],{duration:380,easing:'cubic-bezier(.34,1.4,.44,1)'})});
+})();
+/* ============ SHODO LOADER ============ */
+(function(){
+  var stroke=document.getElementById('stroke'),tip=document.getElementById('tip'),spct=document.getElementById('spct'),stamp=document.getElementById('stamp'),painting=false;
+  var LEN=stroke.getTotalLength();stroke.style.strokeDasharray=LEN;stroke.style.strokeDashoffset=LEN;
+  document.getElementById('paint').addEventListener('click',function(){
+    if(painting)return;painting=true;stamp.style.opacity=0;
+    var start=null,DUR=2300;tip.setAttribute('opacity','1');
+    function step(ts){
+      if(!start)start=ts;var p=Math.min(1,(ts-start)/DUR);
+      var e=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+      stroke.style.strokeDashoffset=LEN*(1-e);
+      var pt=stroke.getPointAtLength(LEN*e);tip.setAttribute('cx',pt.x);tip.setAttribute('cy',pt.y);tip.setAttribute('r',String(8-3*Math.sin(p*Math.PI)));
+      spct.textContent=Math.round(e*100);
+      if(p<1){requestAnimationFrame(step)}
+      else{tip.setAttribute('opacity','0');painting=false;
+        stamp.animate([{opacity:0,transform:'rotate(9deg) scale(2.1)'},{opacity:1,transform:'rotate(9deg) scale(0.94)',offset:0.55},{opacity:1,transform:'rotate(9deg) scale(1)'}],{duration:360,easing:'cubic-bezier(.3,1.3,.4,1)',fill:'forwards'});
+        stamp.style.opacity=1;
+      }
+    }
+    requestAnimationFrame(step);
+  });
+})();
+</script>
+</body>
+</html>
