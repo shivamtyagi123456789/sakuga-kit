@@ -1,4 +1,4 @@
-# COMPONENTS — Full Index (all three kits)
+# COMPONENTS — Full Index (all four kits)
 
 How to use this index: find the component, note its file + location, copy that block.
 Locations in `ui-components.html` are the section comments (e.g. `<!-- VL-7 SLIDERS -->`)
@@ -120,3 +120,55 @@ see `FLUID_KIT.md`.
 | 28 | Social & Engagement | Pour Poll | Star-Burst Rating · Reaction Floats · Share Sheet |
 | 29 | Calendars & Booking | Ink-Bleed Calendar | Stamp Book · Week Slide · Slot Cascade |
 | 30 | Empty / Error / Success | Liquid-Check Success | Seal Pop Steps · Glitch 404 · Shake-Retry |
+
+## E. Flagship Kit — flagship-pieces.html (100)
+
+100 bespoke scene-level pieces in 10 genre batches. Each piece is an
+`<article class="piece">` in its batch section; its engine lives in that batch's
+isolated script — find it by the `data-canvas` name. Every piece has one matched
+kanji moment earned by an in-scene event. Averages are the corrected scores from
+each batch's own Rate → Correct → Rate review panel (in the file, after each batch).
+
+**Batch 01 — Night & Festival (avg 80.6):** Fireworks Crackle Sky · Rain Window ·
+Campfire · Neon Street Sign · Paper Lantern Release · Shooting-Star Wish ·
+Thunderstorm · Festival Drum · Fireflies in a Jar · Moon Phases Dial
+
+**Batch 02 — Ocean & Water (avg 82.5):** Tidal Wave · Waterfall · Ice Cracking ·
+Jellyfish Drift · Deep Sea Anglerfish · Bubble Column · Ferry Wake ·
+Monsoon Puddle · Glacier Calving · Hot Spring Onsen
+
+**Batch 03 — Sky & Cosmos (avg 83.4):** Solar Eclipse · Aurora Veil · Comet Pass ·
+Rocket Launch · Satellite Orbit · Meteor Shower Peak · Nebula Forge ·
+Sunrise Summit · Kite Festival Sky · Gravity Well
+
+**Batch 04 — Seasons & Forest (avg 83.2):** Celebi Forest · Cherry Blossom Storm ·
+Autumn Leaf Whirlwind · First Snowfall · Monsoon Jungle · Bamboo Grove Wind ·
+Desert Dunes · Volcano · Misty Valley Dawn · Seed to Tree
+
+**Batch 05 — City Night & Streets (avg 83.1):** Rush Hour Traffic · Metro Train Pass ·
+Rooftop City · Rainy Alley Steam · Traffic Signal Junction · Skyscraper Windows ·
+Night Market · Highway Interchange · Clock Tower Midnight · Street Performer Circle
+
+**Batch 06 — Music & Rhythm (avg 84.0):** Vinyl Groove · Piano Waterfall ·
+Drum Kit Storm · Guitar String Pluck · Equalizer City · Metronome Pendulum ·
+Tape Reel Machine · Step Sequencer Garden · Saxophone Smoke · DJ Deck Battle
+
+**Batch 07 — Creatures & Companions (avg 84.1):** Sleeping Cat · Goldfish Bowl Orbit ·
+Spider Weaver · Butterfly Garden Chase · Owl Watch · Ant Colony · Chameleon Catch ·
+Penguin Waddle · Dragon Hatchling · Crow Messenger
+
+**Batch 08 — Machines & Invention (avg 84.2):** Gear Train · Pendulum Clock Escapement ·
+Steam Engine Piston · Marble Run Machine · Conveyor Factory · Hydraulic Press ·
+Magnetic Crane · Perpetual Chain Reaction · Jacquard Loom · Lighthouse Mechanism
+
+**Batch 09 — Journeys & Travel (avg 84.6):** Hot Air Balloon Drift · Mountain Cable Car ·
+Desert Caravan · River Raft Rapids · Night Train Window · Paper Plane Voyage ·
+Submarine Descent · Rickshaw Alley Run · Sailboat Regatta · Space Elevator
+
+**Batch 10 — Grand Finale: Elements & Wonder (avg 85.3):** Storm Sea Lighthouse ·
+Volcano Ocean Birth · Aurora Glacier Night · Festival of a Thousand Sparks ·
+Dragon Storm Rider · Clockwork Garden · Moonlit Tide Pools · Grand Waterfall Shrine ·
+Star Whale Migration · One Hundred Sparks Finale
+
+Collection average **83.5/100** · Top piece: **Night Train Window (87)**.
+Full spec + how the file is organised: see `FLAGSHIP_KIT.md`.
