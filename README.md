@@ -2,7 +2,7 @@
 
 Three collections in one repo, all single-file, zero dependencies, vanilla HTML/CSS/JS:
 
-1. **Sakuga Kit** (`showcase.html`) — anime-impact components: every component pairs spring/damping physics with a matched Japanese kanji moment.
+1. **Sakuga Kit** (`showcase.html`) — 13 anime-impact components: every component pairs spring/damping physics with a matched Japanese kanji moment.
 2. **Creative UI/UX Kit** (`ui-components.html`) — 169 general-use components: Waves 1–2 (19 flagship pieces) + a Variant Lab of 30 types × 5 variants (150), each variant a different design + colour pattern (amber, teal, crimson Sakuga, violet, sky, emerald, rose, mono).
 3. **Fluid Kit** (`fluid-components.html`) — 120 components (30 types × 4 variants) built on liquid behaviour: every type has exactly one fluid/goo variant (pours, drips, waves, merges — re-colourable through 6 liquid themes: Ink, Honey Amber, Ocean Blue, Grape Jelly, Mint Syrup, Rose Syrup) plus three different motion inventions. Self-reviewed average 72.3/100.
 
@@ -12,7 +12,7 @@ Open any file in any browser — no build step, no server.
 
 | File | What it is |
 |---|---|
-| `showcase.html` | Sakuga collection — full working code, 7 components, blocks marked with comments |
+| `showcase.html` | Sakuga collection — full working code, 13 components, blocks marked with comments |
 | `ui-components.html` | Creative Kit board — full working code, 169 components |
 | `fluid-components.html` | Fluid Kit board — full working code, 120 components (30 types × 4 variants) |
 | `SAKUGA_KIT.md` | Sakuga spec + per-component code locations, how each effect works, and its change knobs |

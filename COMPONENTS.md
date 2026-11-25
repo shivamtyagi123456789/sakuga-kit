@@ -5,7 +5,7 @@ Locations in `ui-components.html` are the section comments (e.g. `<!-- VL-7 SLID
 and the matching CSS/JS blocks with the same name. Locations in `showcase.html` are
 the script comments (e.g. `/* ============ IMPACT BUTTON ============ */`).
 
-## A. Sakuga Kit — showcase.html (7)
+## A. Sakuga Kit — showcase.html (13)
 
 | # | Component | Kanji | Signature effect | Location |
 |---|---|---|---|---|
@@ -16,6 +16,12 @@ the script comments (e.g. `/* ============ IMPACT BUTTON ============ */`).
 | 5 | Folding Fan Deck | 扇 | 5 element blades fan from one pivot | FAN DECK |
 | 6 | The Zipper | 秘 HIMITSU | Drag pull, polygon-clip wedge reveal | ZIPPER |
 | 7 | Shodo Brush Loader | 書 / 完 | Self-drawing ink stroke, turbulence edge, stamp slam | SHODO LOADER |
+| 8 | Element Lanterns | 火 HI · 水 SUI · 風 FŪ | Pendulum-swing lanterns, lagged tassel physics, element particle scenes (embers/drips/leaves), kanji per element | ELEMENT LANTERNS |
+| 9 | Lantern Festival | 祭 MATSURI | Full night scene — moon, twinkling stars, rooftop silhouettes, wire lanterns, film grain; tap releases a sky lantern | LANTERN FESTIVAL |
+| 10 | Constellation | 星 HOSHI | Tap-to-place stars snapped to the field, glow lines draw on between nodes, completion kanji + constellation name | CONSTELLATION |
+| 11 | Origami Map | 図 ZU | Paper map unfolds in stages (crease shadows, street grid, river), route draws itself, pins pop with springs | ORIGAMI MAP |
+| 12 | Elastic Pull | 弾 DAN | Rubber-band drag — stretch + thinning along the pull, spring snap-back with wobble, ripples + droplets, kanji past the limit | ELASTIC PULL |
+| 13 | Ink Tabs | タブ TABU | Brush stroke sweeps to the selected tab (turbulence ink edges + soft under-stroke), splatter, panel ink-fade | INK TABS |
 
 Full per-component explanation + knobs: see `SAKUGA_KIT.md`.
 

@@ -38,8 +38,9 @@ Antigravity, BuildBot) given this file + `showcase.html` must build in THIS styl
 
 ## Components in v1
 Impact Button · Liquid Goo Toggle · Living Slider · Pond (ambient koi) · Folding Fan Deck · Zipper Reveal · Shodo Brush Loader ·
-Element Lanterns (festival scene, in chat demos) · Ink Tabs · Hanko Seal ·
-Ink Input · Toast.
+Element Lanterns （火/水/風） · Lantern Festival （祭） · Constellation （星） · Origami Map （図） ·
+Elastic Pull （弾） · Ink Tabs （タブ） — all 13 live in `showcase.html`.
+(Also seen in chat demos: Hanko Seal · Ink Input · Toast.)
 
 ## Copy-paste prompt for any AI agent
 "Build this component in the Sakuga Kit style (see SAKUGA_KIT.md): near-black +
@@ -107,6 +108,57 @@ The stroke is an SVG path; its length (getTotalLength) drives a dash-offset draw
 roughens the stroke so it reads as ink, not vector. A brush-tip circle rides
 getPointAtLength and thins mid-stroke; the % counter follows eased progress; at 100%
 the 完 stamp slams (scale 2.1 → 0.94 → 1, 360ms). Knobs: duration, path `d`, filter scale.
+
+### 8. Element Lanterns — `/* ============ ELEMENT LANTERNS ============ */`
+Three lanterns （火 fire #FF7A29/#FFB347, 水 water #39A8E8/#7CCBFF, 風 wind #A9E8C0) hang from
+strings. Each is a true pendulum: velocity += (−0.052·angle + gust), damped ×0.985; the
+tassel runs its own softer spring chasing the lantern angle ×1.7, so it lags and overshoots.
+Random gusts shove all three. Selecting a lantern swaps the canvas particle system —
+embers rising (fire), drips falling into expanding ripples (water), leaves streaming
+sideways (wind) — recolours the panel scene, and fires that element's kanji moment.
+Knobs: pendulum stiffness 0.052, tassel chase 0.075 / damping 0.92, gust interval.
+
+### 9. Lantern Festival — `/* ============ LANTERN FESTIVAL ============ */`
+One canvas paints the whole night: 110 twinkling stars, a glowing cratered moon, six
+lanterns swaying on a sagging wire, rooftop silhouettes with lit windows, and a CSS
+film-grain overlay jittering on steps(4) above a vignette. Tap anywhere: a sky lantern
+releases from the rooftops — flickering flame, sine sway, slow shrink — and drifts up
+until it fades; one also auto-releases every ~400 frames. First taps fire 祭 MATSURI
+(1.7s cooldown so the kanji never spams). Knobs: star count, wire sag, release rate.
+
+### 10. Constellation — `/* ============ CONSTELLATION ============ */`
+A 90-star twinkling field with occasional shooting stars. Tap: the point snaps to the
+nearest field star within 26px (or plants a new one), pulses a ring, and the line to the
+previous star draws itself at 0.028/frame with a glowing travelling head. 3+ stars close
+a faint crimson polygon; **Complete** flashes the lines and fires 星 HOSHI, naming the
+constellation （鯉座， 扇座， 弓座… by star count). **Clear** resets the sky.
+Knobs: snap radius 26, line draw speed, names list.
+
+### 11. Origami Map — `/* ============ ORIGAMI MAP ============ */`
+A 2×2 paper map (street-grid texture, river band, crease shading) folded in quarters.
+Stage classes s0→s3 resize the sheet and un-rotate the panels on their real fold edges
+(right panel rotateY −178°→0 around its left edge, bottom rotateX, corner panel both),
+all on cubic-bezier(.3,1.18,.35,1). At full unfold the route path draws itself
+(dash-offset, 1.7s), the two pins pop in with spring scale, a compass fades in spinning,
+and 図 ZU fires. Knobs: stage captions, route path `d`, fold durations.
+
+### 12. Elastic Pull — `/* ============ ELASTIC PULL ============ */`
+A crimson medallion （弾） on a spring. Dragging chases the pointer with a stiff spring
+(×0.2 pull, ×0.7 damping) so it lags and stretches: the disc rotates to the pull angle,
+scales up to +50% along it and thins −24% across it, then counter-rotates so the kanji
+stays upright. Release switches to a soft spring (×0.05, damping 0.90) — a long wobbling
+overshoot home — plus two ripple rings and 16 droplets; past 105px of stretch it also
+fires 弾 DAN. Idle, it breathes a faint ring every 2.6s. Knobs: spring constants,
+stretch threshold 105, medallion size.
+
+### 13. Ink Tabs — `/* ============ INK TABS ============ */`
+Four tabs （家 Home, 探 Explore, 庫 Library, 定 Settings). Selecting one rebuilds an SVG
+brush path from the old tab's centre to the new one — a fat soft under-stroke (blurred,
+32% crimson) plus the main stroke through a feTurbulence displacement filter (#inktab,
+scale 4) so the edge bleeds like ink. Both draw on over 620ms while a brush-tip dot
+rides getPointAtLength; landing fires 6 splatter droplets and the タブ TABU kanji moment.
+The panel below swaps content with a blur-fade rise. Knobs: tab data `TD[]`, draw
+duration, displacement scale.
 
 ## Also in this repo now
 - `ui-components.html` — the Creative UI/UX Kit: 169 components (Waves 1–2 + 30 types × 5 variants).
