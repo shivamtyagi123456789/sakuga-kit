@@ -1,11 +1,12 @@
 # Sakuga Kit — Anime-Impact + Creative UI Components
 
-Two collections in one repo, both single-file, zero dependencies, vanilla HTML/CSS/JS:
+Three collections in one repo, all single-file, zero dependencies, vanilla HTML/CSS/JS:
 
 1. **Sakuga Kit** (`showcase.html`) — anime-impact components: every component pairs spring/damping physics with a matched Japanese kanji moment.
 2. **Creative UI/UX Kit** (`ui-components.html`) — 169 general-use components: Waves 1–2 (19 flagship pieces) + a Variant Lab of 30 types × 5 variants (150), each variant a different design + colour pattern (amber, teal, crimson Sakuga, violet, sky, emerald, rose, mono).
+3. **Fluid Kit** (`fluid-components.html`) — 120 components (30 types × 4 variants) built on liquid behaviour: every type has exactly one fluid/goo variant (pours, drips, waves, merges — re-colourable through 6 liquid themes: Ink, Honey Amber, Ocean Blue, Grape Jelly, Mint Syrup, Rose Syrup) plus three different motion inventions. Self-reviewed average 72.3/100.
 
-Open either file in any browser — no build step, no server.
+Open any file in any browser — no build step, no server.
 
 ## Files
 
@@ -13,8 +14,10 @@ Open either file in any browser — no build step, no server.
 |---|---|
 | `showcase.html` | Sakuga collection — full working code, 7 components, blocks marked with comments |
 | `ui-components.html` | Creative Kit board — full working code, 169 components |
+| `fluid-components.html` | Fluid Kit board — full working code, 120 components (30 types × 4 variants) |
 | `SAKUGA_KIT.md` | Sakuga spec + per-component code locations, how each effect works, and its change knobs |
-| `COMPONENTS.md` | Index of every component in both kits: type, variant, pattern, code location |
+| `FLUID_KIT.md` | Fluid spec + code organisation, the board rule, liquid themes, and its change knobs |
+| `COMPONENTS.md` | Index of every component in all three kits: type, variant, pattern, code location |
 | `RECREATE_WITH_AI.md` | Step-by-step process to recreate any component with a low-tier / free AI model |
 | `MODIFY_GUIDE.md` | How to make small changes (colours, text, names) without breaking motion |
 | `README.md` | This file |
