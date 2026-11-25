@@ -164,3 +164,26 @@ duration, displacement scale.
 - `ui-components.html` — the Creative UI/UX Kit: 169 components (Waves 1–2 + 30 types × 5 variants).
 - `COMPONENTS.md` — index of everything in both kits. `RECREATE_WITH_AI.md` — low-tier
   model process. `MODIFY_GUIDE.md` — colours/text/motion knobs for small changes.
+
+## The 150 — everyday components in Sakuga style (sakuga-components.html)
+
+Added 2026-11-25. `sakuga-components.html` holds **150 general website components** —
+the everyday parts of real websites (search bars, buttons, forms, login, cards, tables,
+toasts, sliders, quizzes, settings, chat…) — built to the same 5 rules above, at the
+quality bar of the approved "Sakuga Search" sample. Sakuga Kit total: **13 + 150 = 163**.
+
+- 15 categories × 10: Search · Buttons & CTAs · Navigation & Menus · Inputs & Forms ·
+  Login & Signup · Cards & Lists · Tables & Data Lists · Toasts & Notifications ·
+  Sliders & Progress · Quiz, Polls & Surveys · Loading & Empty States ·
+  Timelines & Activity · Settings & Preferences · Heroes, Banners & Footers · Chat & Social.
+- Every component is **fully functional** with real content and all states
+  (idle/focus/typing/loading/empty/success/error) — not a static mockup.
+- Every component has exactly **one matched kanji moment, earned** by completing its
+  real flow (110px glyph, white outline, dark disc, romaji + meaning, ~1.35s hold).
+- Each batch of 10 closes with a **Rate → Correct → Rate review panel** inside the file;
+  corrected batch averages rise 84.8 → 89.8 across the board; **collection average 88.1**.
+- Structure: one section + one isolated script per batch (off-screen pause via
+  IntersectionObserver, per-piece try/catch isolation, user input escaped via `esc()`).
+- A shared in-page demo account system links the Login batch (signup → login → reset).
+- Full per-piece index: `COMPONENTS.md`, section F. To lift one component, copy its
+  card block + its batch script, or recreate it via `RECREATE_WITH_AI.md`.

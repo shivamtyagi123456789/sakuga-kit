@@ -172,3 +172,31 @@ Star Whale Migration · One Hundred Sparks Finale
 
 Collection average **83.5/100** · Top piece: **Night Train Window (87)**.
 Full spec + how the file is organised: see `FLAGSHIP_KIT.md`.
+
+## F. Sakuga Components — sakuga-components.html (150)
+
+150 everyday website components in Sakuga style (near-black + crimson + earned kanji),
+15 categories × 10, each fully functional with real content and all states. Every batch
+closes with a Rate → Correct → Rate review panel inside the file itself — the panels
+carry the per-piece details, weaknesses and fixes. Corrected batch averages:
+
+| Batch | Category | Pieces | Avg |
+|---|---|---|---|
+| 01 | Search Bars | Library · Command Palette · Flight · Voice · People · Products · Location · FAQ · Code · Trending | 84.8 |
+| 02 | Buttons & CTAs | Buy Now · Download · Follow · Like & Save · Hold-to-Delete · Submit · Copy Text · Play/Pause · Get OTP · Upgrade Pro | 86.5 |
+| 03 | Navigation & Menus | Top Nav · Sidebar · Mobile Dock · Breadcrumbs · Mega Menu · Tabs · Pagination · Hamburger Overlay · Stepper · Floating Pill | 86.7 |
+| 04 | Inputs & Forms | Floating Label · Password Strength · Email Suggest · Phone +91 · OTP Row · Textarea Counter · Date & Time · Branch Select · Multi-Step Form · File Drop | 87.1 |
+| 05 | Login & Signup | Classic Login · Signup · Social Login · Forgot Password · OTP Login · Username Check · Remember Me · 2FA Gate · Magic Link · Guest Upgrade | 87.4 |
+| 06 | Cards & Lists | Product · Profile · Music Tracks · Task List · Pricing · Article · Weather · Notifications · Stats · Event RSVP | 87.6 |
+| 07 | Tables & Data Lists | Marks · Leaderboard · Inventory · Comparison · Timetable · Expenses · Standings · Price List · Attendance · Orders | 87.9 |
+| 08 | Toasts & Notifications | Success Toast · Error Retry · Stack Manager · Island · Bell Panel · Undo Toast · Uploads · Banners · Snackbar · Live Order | 88.7 |
+| 09 | Sliders & Progress | Volume · Price Range · Brightness · Rating Stars · Skill Ring · Savings Goal · Seek Bar · Temp Dial · Upload Bar · Survey Scale | 88.8 |
+| 10 | Quiz, Polls & Surveys | MCQ · Quiz Runner · True/False Sprint · Poll · Live Poll · Odd One Out · Fill Blank · Match Pairs · Survey · Daily Challenge | 88.8 |
+| 11 | Loading & Empty States | Skeleton Feed · Spinner Family · Page Bar · Empty Search · Inbox Zero · Error Retry · Blur-Up Images · Loading Buttons · App Loader · Filter Empty | 89.1 |
+| 12 | Timelines & Activity | Order Tracker · Activity Feed · Exam Countdown · Milestones · Day Schedule · Story Timeline · Workout · Streak Grid · Changelog · Journey Map | 89.5 |
+| 13 | Settings & Preferences | Theme · Notifications · Accent Colour · Font & Density · Language · Privacy · Quiet Hours · Settings Page · Danger Zone · Accessibility | 89.6 |
+| 14 | Heroes, Banners & Footers | Hero Search · Hero Email · Announcement Bar · Cookie Banner · Sale Countdown · Newsletter Band · App Banner · Mega Footer · Sticky CTA · Hero Carousel | 89.7 |
+| 15 | Chat & Social | Chat Window · Message Input · Typing Stage · Reactions · Stories · Comments · Voice Note · Group Members · Share Sheet · Live Chat | 89.8 |
+
+Collection average **88.1/100**. Sakuga Kit total: **163** (13 showcase + 150 components).
+Spec: see `SAKUGA_KIT.md`, section "The 150".
