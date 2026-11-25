@@ -1,4 +1,4 @@
-# COMPONENTS — Full Index (all four kits)
+# COMPONENTS — Full Index (all five kits)
 
 How to use this index: find the component, note its file + location, copy that block.
 Locations in `ui-components.html` are the section comments (e.g. `<!-- VL-7 SLIDERS -->`)
@@ -200,3 +200,11 @@ carry the per-piece details, weaknesses and fixes. Corrected batch averages:
 
 Collection average **88.1/100**. Sakuga Kit total: **163** (13 showcase + 150 components).
 Spec: see `SAKUGA_KIT.md`, section "The 150".
+
+## G. Sakuga Live 200 — live-components.html (200)
+
+20 categories × 10 — every component is live: interactive and animated, Sakuga palette and kanji rules throughout.
+
+Buttons · Toggles & Switches · Sliders & Steppers · Checkboxes & Radios · Text Inputs · Loaders & Progress · Reactions · Toasts & Alerts · Cards · Tabs & Accordions · Menus & Nav · Badges & Avatars · Media & Players · Counters & Stats · Modals & Popovers · Drag & Sort · Scroll & Reveal · Text Effects · Nature Scenes · Celebration & Rewards (10 each).
+
+Sakuga Live total: **200**. Repo total: **752**.
